@@ -1,11 +1,15 @@
-
-const fs = require("fs");
-
-const fileName = ''
-function cat() {
-  fs.readFile(fileName, "utf8", (err, file) => {
-    process.stdout.write(file);
-  });
+const fs = require('fs');
+function cat(fileName) {
+    fs.readFile(fileName, 'utf8', (err,data) => {
+    if (err) {
+        console.error(err)
+    return
+    } else{
+        console.log(data)
+        process.stdout.write("prompt > ");
+    }
+})
 }
 
-module.exports = { cat };
+
+module.exports = {cat}

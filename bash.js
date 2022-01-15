@@ -1,6 +1,7 @@
 const { pwd } = require("./pwd");
 const { ls } = require("./ls");
 const { cat } = require("./cat");
+const { request } = require("./request")
 
 //Output a prompt
 process.stdout.write("prompt > ");
@@ -9,14 +10,17 @@ process.stdout.write("prompt > ");
 
   process.stdin.on("data", (data) => {
     const cmd = data.toString().trim();
-    const fileArr = cmd.split(' ');
-    const fileName = fileArr[1]
+    let fileArr = cmd.split(' ')
+    let order = fileArr[0]
+    let fileName = fileArr[1]
     if (cmd === "pwd") {
       pwd();
     } else if (cmd === "ls") {
       ls();
-    } else if (cmd.includes("cat")) {
-      cat();
+    } else if(order === "cat") {
+      cat(fileName)
+    } else if (order === "curl"){
+      request(fileName)
     } else {
       process.stdout.write("You typed: " + cmd);
       process.stdout.write("\nprompt > ");
